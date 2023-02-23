@@ -79,5 +79,6 @@ def upgrade(request, tg_id, product_id):
         if serializer.is_valid():
             serializer.delete()
             return Response({"msg": "Удалено!"})
+        return Response(serializer.errors)
 
     return Response(status=status.HTTP_404_NOT_FOUND)

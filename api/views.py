@@ -75,9 +75,8 @@ def upgrade(request, tg_id, product_id):
         return Response(serializer.errors)
 
     if request.method == 'DELETE':
-        serializer = BasketSerializers(snippet, data=request.data)
-        if serializer.is_valid():
-            serializer.delete()
+        if snippet:
+            snippet.delete()
             return Response({"msg": "Удалено!"})
         return Response(serializer.errors)
 

@@ -53,7 +53,7 @@ class BasketByUser(APIView):
         return Response(serializer.data)
 
 
-@api_view(["GET", "PUT"])
+@api_view(["GET", "PUT", "DELETE"])
 def upgrade(request, tg_id, product_id):
     try:
         snippet = BasketModel.objects.get(
@@ -73,4 +73,11 @@ def upgrade(request, tg_id, product_id):
             serializer.save()
             return Response({"msg": "Обновлено!"})
         return Response(serializer.errors)
+
+    if request.method == 'DELETE':
+        serializer = BasketSerializers(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.delete()
+            return Response({"msg": "Удалено!"})
+
     return Response(status=status.HTTP_404_NOT_FOUND)

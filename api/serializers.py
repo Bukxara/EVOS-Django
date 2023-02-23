@@ -30,4 +30,3 @@ class BasketUpdateSerializers(serializers.ModelSerializer):
     class Meta:
         model = BasketModel
         fields = ['product_count']
-

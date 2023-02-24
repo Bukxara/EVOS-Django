@@ -54,7 +54,7 @@ class BasketByUser(APIView):
 
 
 @api_view(["GET", "PUT", "DELETE"])
-def upgrade(request, tg_id, product_id):
+def upgrade(request, tg_id, product_id=None):
     try:
         snippet = BasketModel.objects.get(
             telegram_id=tg_id, product_id=product_id)

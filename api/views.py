@@ -52,9 +52,14 @@ class BasketByUser(APIView):
         serializer = BasketSerializers(data, many=True)
         return Response(serializer.data)
 
+    def delete(self, request, tg_id):
+        data = BasketModel.objects.filter(telegram_id=tg_id)
+        data.delete()
+        return Response({"msg": "Очищено!"})
+
 
 @api_view(["GET", "PUT", "DELETE"])
-def upgrade(request, tg_id, product_id=None):
+def upgrade(request, tg_id, product_id):
     try:
         snippet = BasketModel.objects.get(
             telegram_id=tg_id, product_id=product_id)
@@ -76,7 +81,6 @@ def upgrade(request, tg_id, product_id=None):
 
     if request.method == 'DELETE':
         if snippet:
-            print(product_id)
             snippet.delete()
             return Response({"msg": "Удалено!"})
         return Response(serializer.errors)

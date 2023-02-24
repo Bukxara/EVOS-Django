@@ -76,6 +76,7 @@ def upgrade(request, tg_id, product_id=None):
 
     if request.method == 'DELETE':
         if snippet:
+            print(product_id)
             snippet.delete()
             return Response({"msg": "Удалено!"})
         return Response(serializer.errors)

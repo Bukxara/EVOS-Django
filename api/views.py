@@ -47,16 +47,15 @@ class BasketView(ModelViewSet):
 
 
 class BasketByUser(APIView):
+    def delete(self, request, tg_id):
+        data = BasketModel.objects.filter(telegram_id=tg_id)
+        data.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     def get(self, request, tg_id):
         data = BasketModel.objects.filter(telegram_id=tg_id)
         serializer = BasketSerializers(data, many=True)
         return Response(serializer.data)
-
-    def delete(self, request, tg_id):
-        data = BasketModel.objects.filter(telegram_id=tg_id)
-        if data:
-            data.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["GET", "PUT", "DELETE"])
@@ -73,14 +72,14 @@ def upgrade(request, tg_id, product_id):
             return Response(serializer.data)
         return Response({'message': "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'PUT':
+    elif request.method == 'PUT':
         serializer = BasketUpdateSerializers(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"msg": "Обновлено!"})
         return Response(serializer.errors)
 
-    if request.method == 'DELETE':
+    elif request.method == 'DELETE':
         if snippet:
             snippet.delete()
             return Response({"msg": "Удалено!"})

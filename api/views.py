@@ -47,7 +47,7 @@ class BasketView(ModelViewSet):
 
 
 class BasketByUser(APIView):
-    def get(self, request, tg_id):
+    def get(self, request, tg_id=None):
         data = BasketModel.objects.filter(telegram_id=tg_id)
         serializer = BasketSerializers(data, many=True)
         return Response(serializer.data)
@@ -55,7 +55,7 @@ class BasketByUser(APIView):
     def delete(self, request, tg_id):
         data = BasketModel.objects.filter(telegram_id=tg_id)
         data.delete()
-        return Response({"msg": "Очищено!"})
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["GET", "PUT", "DELETE"])

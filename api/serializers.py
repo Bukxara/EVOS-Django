@@ -8,12 +8,6 @@ class UserSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserExistsSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = UsersModel
-        fields = ['telegram_id']
-
-
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = CategoryModel

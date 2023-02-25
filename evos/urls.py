@@ -33,8 +33,7 @@ urlpatterns = [
     path('filter/product/<int:pk>/', ProductsByCategory.as_view()),
     path('types/', AllCategories.as_view()),
     path('upgrade/<str:tg_id>/<str:product_id>/', upgrade),
-    path('filter/basket/<str:tg_id>/', BasketByUser.as_view()),
-    path('users/<str:tg_id>/', UserById.as_view())
+    path('filter/basket/<str:tg_id>/', BasketByUser.as_view())
 ]
 
 

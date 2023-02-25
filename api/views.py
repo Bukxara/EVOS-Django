@@ -58,13 +58,6 @@ class BasketByUser(APIView):
         return Response(serializer.data)
 
 
-class UserById(APIView):
-    def get(self, request, tg_id):
-        data = UsersModel.objects.filter(telegram_id=tg_id)
-        serializer = UserExistsSerializers(data, many=True)
-        return Response(serializer.data)
-
-
 @api_view(["GET", "PUT", "DELETE"])
 def upgrade(request, tg_id, product_id):
     try:

@@ -21,7 +21,6 @@ from api.views import UsersView, CategoryView, ProductView, ProductsByCategory, 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('users', UsersView)
 router.register('category', CategoryView)
 router.register('product', ProductView)
 router.register('basket', BasketView)
@@ -33,7 +32,8 @@ urlpatterns = [
     path('filter/product/<int:pk>/', ProductsByCategory.as_view()),
     path('types/', AllCategories.as_view()),
     path('upgrade/<str:tg_id>/<str:product_id>/', upgrade),
-    path('filter/basket/<str:tg_id>/', BasketByUser.as_view())
+    path('filter/basket/<str:tg_id>/', BasketByUser.as_view()),
+    path('users/<str:tg_id>/', UsersView.as_view())
 ]
 
 

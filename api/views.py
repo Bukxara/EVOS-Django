@@ -10,9 +10,18 @@ from rest_framework import status
 # Create your views here.
 
 
-class UsersView(ModelViewSet):
-    queryset = UsersModel.objects.all()
+class UsersView(APIView):
     serializer_class = UserSerializers
+
+    def get(self, request, tg_id):
+        try:
+            data = UsersModel.objects.filter(telegram_id=tg_id)
+        except UsersModel.DoesNotExist:
+            return Response({"msg": "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
+        if data:
+            serializer = UserSerializers(data)
+            return Response(serializer.data)
+        return Response({"msg": "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
 
 
 class CategoryView(ModelViewSet):

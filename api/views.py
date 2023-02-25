@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .serializers import UserSerializers, CategorySerializers, ProductSerializers, BasketSerializers, BasketUpdateSerializers
+from .serializers import UserSerializers, CategorySerializers, ProductSerializers, BasketSerializers, BasketUpdateSerializers, UserExistsSerializers
 from .models import UsersModel, CategoryModel, ProductModel, BasketModel
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -55,6 +55,13 @@ class BasketByUser(APIView):
     def get(self, request, tg_id):
         data = BasketModel.objects.filter(telegram_id=tg_id)
         serializer = BasketSerializers(data, many=True)
+        return Response(serializer.data)
+
+
+class UserById(APIView):
+    def get(self, request, tg_id):
+        data = UsersModel.objects.filter(telegram_id=tg_id)
+        serializer = UserExistsSerializers(data, many=True)
         return Response(serializer.data)
 
 

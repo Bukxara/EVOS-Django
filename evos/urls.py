@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from api.views import UsersView, CategoryView, ProductView, ProductsByCategory, AllCategories, BasketView, upgrade, BasketByUser
+from api.views import *
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -33,7 +33,8 @@ urlpatterns = [
     path('types/', AllCategories.as_view()),
     path('upgrade/<str:tg_id>/<str:product_id>/', upgrade),
     path('filter/basket/<str:tg_id>/', BasketByUser.as_view()),
-    path('users/<str:tg_id>/', UsersView.as_view())
+    path('users/<str:tg_id>/', UsersView.as_view()),
+    path('users/', post_users)
 ]
 
 

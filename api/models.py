@@ -7,7 +7,7 @@ from django.urls import reverse
 class UsersModel(models.Model):
     username = models.CharField(max_length=50)
     telegram_id = models.CharField(max_length=50)
-    language = models.CharField(max_length=2)
+    language = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.username

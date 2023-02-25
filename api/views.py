@@ -95,3 +95,12 @@ def upgrade(request, tg_id, product_id):
         return Response(serializer.errors)
 
     return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(["POST"])
+def post_users(request):
+    serializer = UserSerializers(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"msg": "Добавлено!"}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors)

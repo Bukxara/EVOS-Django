@@ -109,6 +109,6 @@ def post_users(request):
     elif request.method == "GET":
         data = UsersModel.objects.all()
         if data:
-            serializer = UserSerializers(data)
+            serializer = UserSerializers(data, many=True)
             return Response(serializer.data)
         return Response({"msg": "База данных пуста"}, status=status.HTTP_404_NOT_FOUND)

@@ -19,7 +19,7 @@ class UsersView(APIView):
         except UsersModel.DoesNotExist:
             return Response({"msg": "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
         if data:
-            serializer = UserSerializers(data)
+            serializer = UserSerializers(data, many=True)
             return Response(serializer.data)
         return Response({"msg": "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
 

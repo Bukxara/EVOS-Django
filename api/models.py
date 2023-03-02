@@ -8,6 +8,7 @@ class UsersModel(models.Model):
     username = models.CharField(max_length=50)
     telegram_id = models.CharField(max_length=50)
     language = models.CharField(max_length=2, blank=True)
+    phone_number = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.username
@@ -40,6 +41,16 @@ class BasketModel(models.Model):
     telegram_id = models.CharField(max_length=50)
     product_id = models.CharField(max_length=9)
     product_count = models.IntegerField()
+
+    def __str__(self):
+        return self.telegram_id
+
+
+class OrderModel(models.Model):
+    telegram_id = models.CharField(max_length=50)
+    order_items = models.TextField()
+    order_adress = models.CharField(max_length=200)
+    payment_method = models.CharField(max_length=20)
 
     def __str__(self):
         return self.telegram_id

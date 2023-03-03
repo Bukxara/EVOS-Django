@@ -7,7 +7,7 @@ from django.urls import reverse
 class UsersModel(models.Model):
     username = models.CharField(max_length=50)
     telegram_id = models.CharField(max_length=50)
-    user_address = models.JSONField(blank=True)
+    user_address = models.JSONField(max_length=200, null=True)
     phone_number = models.CharField(max_length=30, blank=True)
 
     def __str__(self):

@@ -11,7 +11,7 @@ class UserSerializers(serializers.ModelSerializer):
 class UsersUpdateSerializers(serializers.ModelSerializer):
     class Meta:
         model = UsersModel
-        fields = ['phone_number']
+        fields = ['phone_number', 'user_address']
 
 
 class CategorySerializers(serializers.ModelSerializer):
@@ -42,9 +42,3 @@ class OrderSerializers(serializers.ModelSerializer):
     class Meta:
         model = OrderModel
         fields = '__all__'
-
-
-class OrderUpdateSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = OrderModel
-        fields = ['order_address']

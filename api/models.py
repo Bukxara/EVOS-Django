@@ -7,7 +7,7 @@ from django.urls import reverse
 class UsersModel(models.Model):
     username = models.CharField(max_length=50)
     telegram_id = models.CharField(max_length=50)
-    language = models.CharField(max_length=2, blank=True)
+    user_address = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
@@ -49,7 +49,6 @@ class BasketModel(models.Model):
 class OrderModel(models.Model):
     telegram_id = models.CharField(max_length=50)
     order_items = models.TextField()
-    order_address = models.CharField(max_length=200)
     payment_method = models.CharField(max_length=20)
 
     def __str__(self):

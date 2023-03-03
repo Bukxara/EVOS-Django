@@ -49,7 +49,7 @@ class BasketModel(models.Model):
 class OrderModel(models.Model):
     telegram_id = models.CharField(max_length=50)
     order_items = models.TextField()
-    order_adress = models.CharField(max_length=200)
+    order_address = models.CharField(max_length=200)
     payment_method = models.CharField(max_length=20)
 
     def __str__(self):

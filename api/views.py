@@ -89,6 +89,18 @@ class OrderView(APIView):
             return Response(serializer.data)
         return Response({"message": "База данных пуста!"}, status=status.HTTP_204_NO_CONTENT)
 
+    def put(self, request, tg_id):
+        try:
+            info = OrderModel.objects.get(telegram_id=tg_id)
+        except OrderModel.DoesNotExist:
+            return Response({"message": "Не найдено!"}, status=status.HTTP_404_NOT_FOUND)
+        if info:
+            serializer = OrderUpdateSerializers(info, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({"message": "Обновлено!"}, status=status.HTTP_202_ACCEPTED)
+            return Response(serializer.errors)
+
 
 @api_view(["GET", "PUT", "DELETE"])
 def upgrade(request, tg_id, product_id):

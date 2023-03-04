@@ -40,6 +40,13 @@ class CategoryView(ModelViewSet):
     queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializers
 
+class CategoryViewByName(APIView):
+
+    def get(self, request, name):
+        data = CategoryModel.objects.filter(category_name = name)
+        serializer = CategorySerializers(data, many=True)
+        return Response(serializer.data)
+
 
 class ProductView(ModelViewSet):
     queryset = ProductModel.objects.all()
@@ -54,13 +61,21 @@ class AllCategories(APIView):
         return Response(serializer.data)
 
 
-class ProductsByCategory(APIView):
+class ProductsByCategoryId(APIView):
 
     def get(self, request, pk):
         data = ProductModel.objects.filter(category_id=pk)
         serializer = ProductSerializers(data, many=True)
         return Response(serializer.data)
 
+
+class ProductsByCategoryName(APIView):
+
+    def get(self, request, name):
+        data = ProductModel.objects.filter(category_name=name)
+        serializer = ProductSerializers(data, many=True)
+        return Response(serializer.data)
+    
 
 class BasketView(ModelViewSet):
     queryset = BasketModel.objects.all()

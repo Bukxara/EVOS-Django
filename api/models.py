@@ -15,7 +15,7 @@ class UsersModel(models.Model):
 
 
 class CategoryModel(models.Model):
-    category_name = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=50, unique=True)
     category_image = models.ImageField(upload_to="images/", blank=True)
 
     def __str__(self):
@@ -25,6 +25,8 @@ class CategoryModel(models.Model):
 class ProductModel(models.Model):
     category_id = models.ForeignKey(
         CategoryModel, on_delete=models.SET_NULL, null=True)
+    category_name = models.ForeignKey(
+        CategoryModel, to_field="category_name", on_delete=models.SET_NULL, null=True, related_name="category")
     product_name = models.CharField(max_length=50)
     product_price = models.IntegerField()
     product_description = models.TextField(blank=True)
@@ -47,6 +49,7 @@ class BasketModel(models.Model):
 
 
 class OrderModel(models.Model):
+
     telegram_id = models.CharField(max_length=50)
     order_items = models.TextField()
     payment_method = models.CharField(max_length=20)

@@ -24,6 +24,7 @@ router = DefaultRouter()
 router.register('category', CategoryView)
 router.register('product', ProductView)
 router.register('basket', BasketView)
+router.register('order', AllOrdersView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,7 +39,7 @@ urlpatterns = [
     path('upgrade/<str:tg_id>/<str:product_id>/', upgrade),
     path('users/<str:tg_id>/', UsersView.as_view()),
     path('users/', post_users),
-    path('orders/<str:tg_id>/', OrderView.as_view()),
+    path('orders/<str:tg_id>/', OrderViewByUser.as_view()),
     path('orders/', post_order)
 ]
 

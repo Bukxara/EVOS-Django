@@ -39,12 +39,12 @@ class UsersView(APIView):
 class CategoryView(ModelViewSet):
     queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializers
-    
+
 
 class CategoryViewByName(APIView):
 
     def get(self, request, name):
-        data = CategoryModel.objects.filter(category_name = name)
+        data = CategoryModel.objects.filter(category_name=name)
         serializer = CategorySerializers(data, many=True)
         return Response(serializer.data)
 
@@ -82,7 +82,7 @@ class ProductsByCategoryName(APIView):
         data = ProductModel.objects.filter(category_name=name)
         serializer = ProductSerializers(data, many=True)
         return Response(serializer.data)
-    
+
 
 class BasketView(ModelViewSet):
     queryset = BasketModel.objects.all()
@@ -102,7 +102,12 @@ class BasketByUser(APIView):
         return Response(serializer.data)
 
 
-class OrderView(APIView):
+class AllOrdersView(ModelViewSet):
+    queryset = OrderModel.objects.all()
+    serializer_class = OrderSerializers
+
+
+class OrderViewByUser(APIView):
 
     def get(self, request, tg_id):
         data = OrderModel.objects.filter(telegram_id=tg_id)

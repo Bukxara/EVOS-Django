@@ -39,6 +39,7 @@ class UsersView(APIView):
 class CategoryView(ModelViewSet):
     queryset = CategoryModel.objects.all()
     serializer_class = CategorySerializers
+    
 
 class CategoryViewByName(APIView):
 
@@ -53,8 +54,14 @@ class ProductView(ModelViewSet):
     serializer_class = ProductSerializers
 
 
-class AllCategories(APIView):
+class ProductViewByName(APIView):
+    def get(self, request, name):
+        data = ProductModel.objects.filter(product_name=name)
+        serializer = ProductSerializers(data, many=True)
+        return Response(serializer.data)
 
+
+class AllCategories(APIView):
     def get(self, request):
         data = CategoryModel.objects.all()
         serializer = CategorySerializers(data, many=True)

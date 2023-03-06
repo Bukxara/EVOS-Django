@@ -53,8 +53,8 @@ class OrderModel(models.Model):
     telegram_id = models.CharField(max_length=50)
     order_items = models.TextField()
     payment_method = models.CharField(max_length=20)
-    order_status = models.CharField(max_length=100)
-    order_address = models.JSONField(max_length=200)
+    order_status = models.CharField(max_length=100, null=True)
+    order_address = models.JSONField(max_length=200, null=True)
 
     def __str__(self):
         return self.telegram_id

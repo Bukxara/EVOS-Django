@@ -164,10 +164,18 @@ def post_users(request):
         return Response({"message": "База данных пуста"}, status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(["POST"])
-def post_order(request):
-    serializer = OrderSerializers(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({"message": "Добавлено!"}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors)
+@api_view(["GET", "POST"])
+def get_post_order(request, tg_id=None):
+    if request.method == "GET":
+        data = OrderModel.objects.filter(telegram_id=tg_id)
+        if data:
+            serializer = OrderSerializers(data, many=True)
+            return Response(serializer.data)
+        return Response({"message": "База данных пуста!"}, status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == "POST":
+        serializer = OrderSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Добавлено!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)

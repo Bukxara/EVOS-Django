@@ -51,10 +51,11 @@ class BasketModel(models.Model):
 class OrderModel(models.Model):
 
     telegram_id = models.CharField(max_length=50)
-    order_items = models.TextField()
+    order_items = models.CharField(max_length=1000)
     payment_method = models.CharField(max_length=20)
     order_status = models.CharField(max_length=100, null=True)
     order_address = models.JSONField(max_length=200, null=True)
+    order_sum = models.CharField(max_length=100)
 
     def save(self, *args, **kwargs):
         user = OrderModel.objects.all().filter(telegram_id=self.telegram_id)

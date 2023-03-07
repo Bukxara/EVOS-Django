@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = allowed
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'front',
     'api',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'evos.urls'

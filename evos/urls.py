@@ -40,7 +40,8 @@ urlpatterns = [
     path('users/<str:tg_id>/', UsersView.as_view()),
     path('users/', post_users),
     path('orders/<str:tg_id>/', get_post_order),
-    path('orders/', get_post_order)
+    path('orders/', get_post_order),
+    path('comment/', post_comment)
 ]
 
 

@@ -66,3 +66,13 @@ class OrderModel(models.Model):
 
     def __str__(self):
         return self.telegram_id
+
+
+class CommentModel(models.Model):
+    telegram_id = models.CharField(max_length=50)
+    username = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField()
+
+    def __str__(self):
+        return f"{self.username}'s comment"

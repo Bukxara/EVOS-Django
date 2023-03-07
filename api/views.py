@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
-from .models import UsersModel, CategoryModel, ProductModel, BasketModel, OrderModel
+from .models import UsersModel, CategoryModel, ProductModel, BasketModel, OrderModel, CommentModel
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -179,3 +179,12 @@ def get_post_order(request, tg_id=None):
             serializer.save()
             return Response({"message": "Добавлено!"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
+
+
+@api_view(["POST"])
+def post_comment(request):
+    serializer = CommentSerializers(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message": "Добавлено!"}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors)

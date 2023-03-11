@@ -110,7 +110,7 @@ class AllOrdersView(ModelViewSet):
 class OrderViewByUser(APIView):
 
     def get(self, request, tg_id):
-        data = OrderModel.objects.filter(telegram_id=tg_id)
+        data = OrderModel.objects.filter(telegram_id=tg_id).order_by('id')[:5]
         if data:
             serializer = OrderSerializers(data, many=True)
             return Response(serializer.data)
@@ -167,7 +167,7 @@ def post_users(request):
 @api_view(["GET", "POST"])
 def get_post_order(request, tg_id=None):
     if request.method == "GET":
-        data = OrderModel.objects.filter(telegram_id=tg_id)
+        data = OrderModel.objects.filter(telegram_id=tg_id).order_by('-id')[:5]
         if data:
             serializer = OrderSerializers(data, many=True)
             return Response(serializer.data)

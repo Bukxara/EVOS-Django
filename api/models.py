@@ -57,12 +57,12 @@ class OrderModel(models.Model):
     order_address = models.JSONField(max_length=200, null=True)
     order_sum = models.CharField(max_length=100)
 
-    def save(self, *args, **kwargs):
-        user = OrderModel.objects.all().filter(telegram_id=self.telegram_id)
-        if len(user) == 5:
-            us = OrderModel.objects.all().filter(telegram_id=self.telegram_id).first()
-            us.delete()
-        super(OrderModel, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     user = OrderModel.objects.all().filter(telegram_id=self.telegram_id)
+    #     if len(user) == 5:
+    #         us = OrderModel.objects.all().filter(telegram_id=self.telegram_id).first()
+    #         us.delete()
+    #     super(OrderModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.telegram_id
